@@ -148,3 +148,84 @@ join
 where 
 	c.id_categoria = 6 
 	
+	
+--QUESTÃO 13
+-- INSIRA UM NOVO CLIENTE CHAMADO "Casa de Produtos Naturais" LOCALIZADO NO BRASIL, NA CIDADE DE CURITIBA
+insert
+	into
+	loja.clientes(nome_cliente,
+	cidade,
+	pais)
+values(
+'Casa de Produtos Naturais',
+'Curitiba',
+'Brasil'
+)
+
+
+--QUESTÃO 14
+/* INSIRA UM NOVO PRODUTO "Doce de Leite Artesanal" NA CATEGORIA "Doces",
+ COM PREÇO DE R$ 12,50 E ESTOQUE INICIAL DE 100 UNIDADES */
+
+insert
+	into
+	loja.produtos(nome_produto ,
+	id_categoria,
+	preco,
+	quantidade_estoque)
+values('Doce de Leite Artesanal',
+3,
+12.5,
+100)
+
+
+--QUESTÃO 15
+-- ATUALIZE O ESTOQUE DO PRODUTO "Queijo Manchego La Pastora" PARA 50 UNIDADES
+	
+update
+	loja.produtos p
+set
+	quantidade_estoque = 50
+where
+	nome_produto = 'Queijo Manchego La Pastora'
+	
+	
+--QUESTÃO 16
+-- ATUALIZE O ENDEREÇO DO CLIENTE "Comercio Mineiro" PARA "Rua nova, 465, São Paulo"
+	
+update
+	loja.clientes c
+set
+	endereco = 'Rua nova, 465, São Paulo'
+where
+	nome_cliente = 'Comercio Mineiro'
+	
+
+--QUESTÃO 17
+-- AUMENTE O PREÇO DE TODOS OS PRODUTOS DA CATEGORIA "Laticínios" EM 10%
+	
+update
+	loja.produtos p
+set
+	preco = preco + (preco / 10) 
+	
+
+--QUESTÃO 18
+-- REMOVA O PRODUTO "Chocolate Belga" DA TABELA PRODUTOS
+	
+
+
+--QUESTÃO 19
+-- REMOVA TODOS OS PEDIDOS FEITOS ANTES DE 1° DE JANEIRO DE 2021
+	
+	
+--QUESTÃO 20
+-- LISTE TODOS OS CLIENTES QUE FIZERAM PEDIDOS EM 2022, COM OS DETALHES DE CONTATO
+	
+
+--QUESTÃO 21
+-- LISTE TODOS OS PRODUTOS QUE AINDA NÃO FORAM VENDIDOS EM NENHUM PEDIDO
+
+	
+--QUESTÃO 22
+-- LISTE TODOS OS PEDIDOS QUE INCLUEM PRODUTOS COM PREÇO UNITÁRIO SUPERIOR A R$ 100, EXIBINDO O NOME DO PRODUTO E O NOME DO CLIENTE
