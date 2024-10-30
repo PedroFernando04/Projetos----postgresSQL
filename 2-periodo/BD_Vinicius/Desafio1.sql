@@ -213,19 +213,41 @@ set
 --QUESTÃO 18
 -- REMOVA O PRODUTO "Chocolate Belga" DA TABELA PRODUTOS
 	
+delete
+from
+	loja.produtos
+where
+	nome_produto = 'Chocolate Belga'
 
 
 --QUESTÃO 19
 -- REMOVA TODOS OS PEDIDOS FEITOS ANTES DE 1° DE JANEIRO DE 2021
 	
+delete
+from
+	loja.pedidos p
+where
+	data_pedido < '20210101' 
+	
 	
 --QUESTÃO 20
 -- LISTE TODOS OS CLIENTES QUE FIZERAM PEDIDOS EM 2022, COM OS DETALHES DE CONTATO
 	
+select distinct 
+	nome_cliente, nome_contato
+from
+	loja.clientes c
+join loja.pedidos p on
+	p.id_cliente = c.id_cliente
+where
+	p.data_pedido between '20220101' and '20221231'
 
+	
 --QUESTÃO 21
 -- LISTE TODOS OS PRODUTOS QUE AINDA NÃO FORAM VENDIDOS EM NENHUM PEDIDO
-
+	
+select distinct nome_produto from loja.produtos p join loja.detalhes_pedidos dp on dp.id_produto = p.id_produto join 
+	
 	
 --QUESTÃO 22
 -- LISTE TODOS OS PEDIDOS QUE INCLUEM PRODUTOS COM PREÇO UNITÁRIO SUPERIOR A R$ 100, EXIBINDO O NOME DO PRODUTO E O NOME DO CLIENTE
