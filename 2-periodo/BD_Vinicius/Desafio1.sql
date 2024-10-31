@@ -246,8 +246,31 @@ where
 --QUESTÃO 21
 -- LISTE TODOS OS PRODUTOS QUE AINDA NÃO FORAM VENDIDOS EM NENHUM PEDIDO
 	
-select distinct nome_produto from loja.produtos p join loja.detalhes_pedidos dp on dp.id_produto = p.id_produto join 
-	
-	
+select
+	 nome_produto
+from
+	loja.produtos p
+full join loja.detalhes_pedidos dp on
+	dp.id_produto = p.id_produto
+full join loja.pedidos p2 on
+	p2.id_pedido = dp.id_pedido
+where
+	p2.id_pedido is null
+
 --QUESTÃO 22
 -- LISTE TODOS OS PEDIDOS QUE INCLUEM PRODUTOS COM PREÇO UNITÁRIO SUPERIOR A R$ 100, EXIBINDO O NOME DO PRODUTO E O NOME DO CLIENTE
+	
+select 
+	p.id_pedido, p2.nome_produto, p2.unidade, dp.quantidade, p2.preco, c.nome_categoria
+from
+	loja.pedidos p 
+join
+	loja.detalhes_pedidos dp on dp.id_pedido = p.id_pedido 
+join 
+	loja.produtos p2 on p2.id_produto = p2.id_produto 
+join 
+	loja.categorias c on c.id_categoria = p2.id_categoria 
+where 
+	p2.preco > 100
+
+	
