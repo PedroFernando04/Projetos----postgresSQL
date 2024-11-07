@@ -274,3 +274,109 @@ where
 	p2.preco > 100
 
 	
+--QUETÃO 23
+-- CONTE QUANTOS PRODUTOS EXISTEM EM CADA CATEGORIA
+	
+select
+	count(p.nome_produto) as produtos,
+	nome_categoria
+from
+	loja.produtos p
+join loja.categorias c on
+	c.id_categoria = p.id_categoria
+group by
+	c.id_categoria
+
+--QUESTÃO 24
+-- CALCULE A SOMA DE TODOS OS ITENS EM ESTOQUE
+	
+select
+	sum(quantidade_estoque) as itens_estocados
+from
+	loja.produtos p
+	
+--QUESTÃO 25
+-- CALCULE O PREÇO MÉDIO DOS PRODUTOS QUE TÊM MAIS DE 10 UNIDADES EM ESTOQUE
+	
+select
+	avg(preco)::numeric (10,
+	2) as preco_medio_10un
+from
+	loja.produtos p
+where
+	quantidade_estoque > 10
+	
+--QUESTÃO 26
+-- ENCONTRE O MENOR VALOR DE QUANTIDADE EM ESTOQUE DE TODOS OS PRODUTOS
+	
+select
+	min(quantidade_estoque) as menor_estoque
+from
+	loja.produtos
+	
+--QUESTÃO 27
+-- ENCONTRE O MAIOR PREÇO ENTRE OS PRODUTOS DA CATEGORIA "Doces"
+	
+select
+	max(preco) as maior_preco_doces
+from
+	loja.produtos p
+join loja.categorias c on
+	c.id_categoria = p.id_categoria
+where
+	nome_categoria = 'Doces'
+group by
+	nome_categoria
+
+--QUESTÃO 28
+-- LISTE AS CATEGORIAS QUE POSSUEM MAIS DE 5 PRODUTOS
+
+select
+	nome_categoria
+from
+	loja.categorias c
+join loja.produtos p on
+	c.id_categoria = p.id_categoria
+where
+	p.quantidade_estoque > 5
+group by
+	nome_categoria
+
+--QUESTÃO 29
+-- CONTE O NÚMERO TOTAL DE PEDIDOS REALIZADOS POR CLIENTES DE CADA PAÍS
+	
+select
+	count(dp.id_pedido) as numero_de_pedidos,
+	c.pais
+from
+	loja.detalhes_pedidos dp
+join loja.pedidos p on
+	p.id_pedido = dp.id_pedido
+join loja.clientes c on
+	c.id_cliente = p.id_cliente
+group by
+	c.pais
+order by
+	numero_de_pedidos
+	
+--QUESTÂO 30 
+-- LISTE O TOTAL GASTO POR CADA CLIENTE NA CATEGORIA "Doces", CONSIDERANDO A QUANTIDADE DE PRODUTOS E O PREÇO
+	
+select
+	c.nome_cliente,	sum(p.preco * dp.quantidade) as total_gasto_doces
+from
+	loja.produtos p
+join loja.detalhes_pedidos dp on
+	dp.id_produto = p.id_produto
+join loja.pedidos p2 on
+	p2.id_pedido = dp.id_pedido
+join loja.clientes c on
+	c.id_cliente = p2.id_cliente
+join loja.categorias c2 on
+	p.id_categoria = c2.id_categoria
+where
+	nome_categoria = 'Doces'
+group by
+	c.nome_cliente
+order by 
+	total_gasto_doces
